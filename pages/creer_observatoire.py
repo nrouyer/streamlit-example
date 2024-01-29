@@ -1,4 +1,5 @@
 import streamlit as st
+import neo4j
 from neo4j import GraphDatabase
 # Recherche de base : chercher Google sur Google...
 from googlesearch import search
