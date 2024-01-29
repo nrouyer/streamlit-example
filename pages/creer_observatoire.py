@@ -26,7 +26,7 @@ def add_event(session, url, description):
     session.run("MERGE (e:Event {url: $url}) ON CREATE SET e.description = $description", url=url, description=description)
 
 # Create a driver instance
-driver = GraphDatabase.driver(uri, auth=(username, password))
+driver = GraphDatabase.driver(url, auth=(username, password))
 
 # Insert data from the DataFrame
 with driver.session() as session:
