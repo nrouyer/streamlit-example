@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 import neo4j as neo4j
-import googlesearch-python as googlesearch
+import googlesearch as googlesearch
 
 """
 # Welcome to Streamlit!
