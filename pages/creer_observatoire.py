@@ -4,9 +4,6 @@ from neo4j import GraphDatabase
 # Recherche de base : chercher Google sur Google...
 from googlesearch import search
 
-# Function to add an event to the Neo4j database
-    def add_event(session, url, description):
-        session.run("MERGE (e:Event {url: $url}) ON CREATE SET e.description = $description", url=url, description=description)
 
 st.title("📝 Créer un nouvel observatoire sur les accidents")
 
@@ -28,6 +25,10 @@ if question:
     
     # Create a driver instance
     driver = GraphDatabase.driver(url, auth=(username, password))
+
+    # Function to add an event to the Neo4j database
+    def add_event(session, url, description):
+        session.run("MERGE (e:Event {url: $url}) ON CREATE SET e.description = $description", url=url, description=description)
     
     # Insert data from the DataFrame
     with driver.session() as session:
