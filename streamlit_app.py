@@ -9,5 +9,5 @@ import googlesearch as googlesearch
 # Observatoire des accidents
 """
 
-st.image('chatgpt_accident.jpg', caption='Accidents')
+st.image('chatgpt_accident.png', caption='Accidents')
 
