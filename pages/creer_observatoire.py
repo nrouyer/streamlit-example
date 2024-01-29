@@ -14,17 +14,11 @@ question = st.text_input(
 
 results = search(question, lang="fr", num_results=50, advanced=True)
 
-URI = userdata.get('AAA_URL')
-AUTH = (userdata.get('AAA_USERNAME'), userdata.get('AAA_PWD'))
-
-
-# Replace with your DataFrame
-
 
 # Neo4j connection details
-uri = userdata.get('AAA_URL')
-username = userdata.get('AAA_USERNAME')
-password = userdata.get('AAA_PWD')
+url = st.secrets["AAA_URI"]
+username = st.secrets["AAA_USERNAME"]
+password = st.secrets["AAA_PASSWORD"]
 
 # Function to add an event to the Neo4j database
 def add_event(session, url, description):
