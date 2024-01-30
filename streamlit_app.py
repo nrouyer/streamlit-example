@@ -7,6 +7,20 @@ import googlesearch as googlesearch
 import langchain
 import langchain_community
 import os
+import st_pages
+
+from st_pages import Page, add_page_title, show_pages
+
+"## Declaring the pages in your app:"
+
+show_pages(
+    [
+        Page("streamlit_app.py", "Observatoires", "👀"),
+        # Can use :<icon-name>: or the actual icon
+        Page("pages/creer_observatoire.py", "Créer Observatoire", ":oncoming_automobile:"),
+        # The pages appear in the order you pass them
+    ]
+)
 
 """
 # Observatoire des accidents
