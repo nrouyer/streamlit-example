@@ -20,7 +20,7 @@ show_pages(
     ]
 )
 
-show_pages
+show_pages()
 
 """
 # Observatoire des accidents
