@@ -9,18 +9,6 @@ import langchain_community
 import os
 import st_pages
 
-from st_pages import Page, add_page_title, show_pages
-
-show_pages(
-    [
-        Page("streamlit_app.py", "Observatoires", "👀"),
-        # Can use :<icon-name>: or the actual icon
-        Page("pages/creer_observatoire.py", "Créer Observatoire", ":oncoming_automobile:"),
-        # The pages appear in the order you pass them
-    ]
-)
-
-show_pages()
 
 """
 # Observatoire des accidents
