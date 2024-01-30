@@ -9,3 +9,4 @@ openai
 tiktoken
 cohere
 st_pages
+streamlit_extras
