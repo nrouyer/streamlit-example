@@ -12,7 +12,7 @@ import os
 # Observatoire des accidents
 """
 
-st.image('images/chatgpt_accident.png', caption='Accidents')
+st.image('images/chatgpt_accident.png', caption='Accidents', width=300)
 
 # openai_api_key = st.secrets["OPENAI_KEY"]
 
