@@ -9,6 +9,9 @@ import langchain_community
 import os
 import st_pages
 
+st.set_page_config(
+        page_title="Observatoire des Accidents",
+)
 
 """
 # Observatoire des accidents
