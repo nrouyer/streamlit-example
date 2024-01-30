@@ -8,3 +8,4 @@ langchain_community
 openai
 tiktoken
 cohere
+st_pages
