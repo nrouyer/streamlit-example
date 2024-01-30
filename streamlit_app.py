@@ -14,8 +14,8 @@ st.set_page_config(
         page_title="Observatoire des Accidents",
 )
 
-from streamlit_extras.app_logo import add_logo
-add_logo("images/icon_accidents.png", height=10)
+#from streamlit_extras.app_logo import add_logo
+#add_logo("images/icon_accidents.png", height=10)
 
 
 
