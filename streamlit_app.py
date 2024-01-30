@@ -15,7 +15,7 @@ st.set_page_config(
 )
 
 from streamlit_extras.app_logo import add_logo
-add_logo("http://placekitten.com/120/120")
+add_logo("images/icon_accidents.png")
 
 
 
