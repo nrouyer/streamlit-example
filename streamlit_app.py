@@ -11,8 +11,6 @@ import st_pages
 
 from st_pages import Page, add_page_title, show_pages
 
-"## Declaring the pages in your app:"
-
 show_pages(
     [
         Page("streamlit_app.py", "Observatoires", "👀"),
@@ -21,6 +19,8 @@ show_pages(
         # The pages appear in the order you pass them
     ]
 )
+
+show_pages
 
 """
 # Observatoire des accidents
