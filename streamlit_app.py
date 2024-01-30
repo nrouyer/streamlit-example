@@ -6,6 +6,7 @@ import neo4j as neo4j
 import googlesearch as googlesearch
 import langchain
 import langchain_community
+import os
 
 """
 # Observatoire des accidents
