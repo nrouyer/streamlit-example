@@ -6,7 +6,6 @@ import neo4j as neo4j
 import googlesearch as googlesearch
 import langchain
 import langchain_community
-import os
 
 """
 # Observatoire des accidents
@@ -23,7 +22,6 @@ from langchain_community.chat_models import ChatOpenAI
 from langchain.vectorstores.neo4j_vector import Neo4jVector
 from langchain.embeddings.openai import OpenAIEmbeddings
 
-os.environ['OPENAI_API_KEY'] = st.secrets["OPENAI_KEY"]
 url = st.secrets["NEO4J_URI"]
 username = st.secrets["NEO4J_USERNAME"]
 password = st.secrets["NEO4J_PASSWORD"]
