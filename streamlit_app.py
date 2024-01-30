@@ -13,6 +13,10 @@ st.set_page_config(
         page_title="Observatoire des Accidents",
 )
 
+from st_pages import show_pages_from_config
+
+show_pages_from_config()
+
 """
 # Observatoire des accidents
 """
