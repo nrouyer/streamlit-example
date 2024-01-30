@@ -8,6 +8,10 @@ import langchain
 import langchain_community
 import os
 import st_pages
+import streamlit_extras
+
+from streamlit_extras.app_logo import add_logo
+add_logo("http://placekitten.com/120/120")
 
 st.set_page_config(
         page_title="Observatoire des Accidents",
