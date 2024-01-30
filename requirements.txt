@@ -3,3 +3,6 @@ pandas
 streamlit
 neo4j
 googlesearch-python
+langchain
+langchain_community
+os
