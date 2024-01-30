@@ -1,0 +1,9 @@
+[[pages]]
+path = "streamlit_app.py"
+name = "Interroger Observatoire"
+icon = ":house:"
+
+[[pages]]
+path = "pages/creer_observatoire.py"
+name = "Creer Observatoire"
+icon = ":books:"
