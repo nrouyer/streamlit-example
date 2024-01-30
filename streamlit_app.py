@@ -22,9 +22,9 @@ from langchain_community.chat_models import ChatOpenAI
 from langchain.vectorstores.neo4j_vector import Neo4jVector
 from langchain.embeddings.openai import OpenAIEmbeddings
 
-url = st.secrets["NEO4J_URI"]
-username = st.secrets["NEO4J_USERNAME"]
-password = st.secrets["NEO4J_PASSWORD"]
+url = st.secrets["AAA_URI"]
+username = st.secrets["AAA_USERNAME"]
+password = st.secrets["AAA_PASSWORD"]
 graph = Neo4jGraph(
     url=url,
     username=username,
