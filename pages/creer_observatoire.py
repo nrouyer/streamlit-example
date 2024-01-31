@@ -64,7 +64,7 @@ if question:
                     else:
                         st.error('Le texte est vide', icon="🚨")
                 else:
-                    st.error('Les paragraphes sont vides', icon="🚨")      
+                    st.info('Les paragraphes sont vides', icon="🚨")      
             st.info('Fin enrichissement des articles', icon="ℹ️")    
     st.success('Collecte des articles terminée !')        
     
