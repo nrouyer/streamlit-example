@@ -43,6 +43,7 @@ if question:
 
     with st.spinner('Collecte des articles...'):
         # Insert data from the DataFrame
+        st.info('Ouverture de session', icon="ℹ️")
         with driver.session() as session:
             for result in results:
                 add_article(session, result.url, result.description)
