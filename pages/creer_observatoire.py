@@ -54,6 +54,7 @@ if question:
                 soup = BeautifulSoup(page.content, "html.parser")
                 paragraphs = soup.find_all("p", class_="")
                 if paragraphs:
+                    st.info('le paragraphe n est pas vide', icon="ℹ️")
                     text = ""
                     for paragraph in paragraphs:
                         text = text + paragraph.text.strip()
