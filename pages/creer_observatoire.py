@@ -1,5 +1,7 @@
 import streamlit as st
 import neo4j
+import requests
+from bs4 import BeautifulSoup
 from neo4j import GraphDatabase
 from googlesearch import search
 
@@ -33,17 +35,35 @@ if question:
     driver = GraphDatabase.driver(url, auth=(username, password))
 
     # Function to add an event to the Neo4j database
-    def add_event(session, url, description):
-        session.run("MERGE (e:Event {url: $url}) ON CREATE SET e.description = $description, e.dateCreation=datetime()", url=url, description=description)
+    def add_article(session, url, description):
+        session.run("MERGE (a:Article {url: $url}) ON CREATE SET a.description = $description, a.dateCreation=datetime()", url=url, description=description)
 
-    with st.spinner('Collecte des événements...'):
+    def update_article(session, url, text):
+        session.run("MATCH (a:Article {url: $url}) ON MATCH SET a.text = $text", url=url, text=text)
+
+    with st.spinner('Collecte des articles...'):
             # Insert data from the DataFrame
             with driver.session() as session:
                 for result in results:
-                    add_event(session, result.url, result.description)
+                    add_article(session, result.url, result.description)
 
-    st.success('Collecte terminée !')    
-    
+    st.success('Collecte des articles terminée !')    
+
+    with st.spinner('Mise à jour du texte des articles...'):
+            # Insert data from the DataFrame
+            with driver.session() as session:
+                for result in results:
+                    page = requests.get(result.url)
+                    soup = BeautifulSoup(page.content, "html.parser")
+                    paragraphs = soup.find_all("p", class_="")
+                    if paragraphs:
+                            text = ""
+                            for paragraph in paragraphs:
+                                    text = text + paragraph.text.strip()
+                            if text:
+                                    update_article(session, result.url, text)
+
+    st.success('Mise à jour du texte des articles terminée !')        
     
     # Close the driver
     driver.close()
