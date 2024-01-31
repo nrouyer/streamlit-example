@@ -56,6 +56,7 @@ if question:
                             for paragraph in paragraphs:
                                     text = text + paragraph.text.strip()
                             if text:
+                                    st.info('le texte n'est pas vide', icon="ℹ️")
                                     update_article(session, result.url, text)
 
     st.success('Collecte des articles terminée !')        
