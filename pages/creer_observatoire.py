@@ -42,23 +42,24 @@ if question:
         session.run("MATCH (a:Article {url: $url}) ON MATCH SET a.text = $text", url=url, text=text)
 
     with st.spinner('Collecte des articles...'):
-            # Insert data from the DataFrame
-            with driver.session() as session:
-                for result in results:
-                    add_article(session, result.url, result.description)
+        # Insert data from the DataFrame
+        with driver.session() as session:
+            for result in results:
+                add_article(session, result.url, result.description)
 
-                for result in results:
-                    page = requests.get(result.url)
-                    soup = BeautifulSoup(page.content, "html.parser")
-                    paragraphs = soup.find_all("p", class_="")
-                    if paragraphs:
-                            text = ""
-                            for paragraph in paragraphs:
-                                    text = text + paragraph.text.strip()
-                            if text:
-                                    st.info('le texte n est pas vide', icon="ℹ️")
-                                    update_article(session, result.url, text)
-
+            for result in results:
+                page = requests.get(result.url)
+                soup = BeautifulSoup(page.content, "html.parser")
+                paragraphs = soup.find_all("p", class_="")
+                if paragraphs:
+                    text = ""
+                        for paragraph in paragraphs:
+                            text = text + paragraph.text.strip()
+                        if text:
+                            st.info('le texte n est pas vide', icon="ℹ️")
+                            update_article(session, result.url, text)
+                        else:
+                            st.error('Le texte est vide', icon="🚨")
     st.success('Collecte des articles terminée !')        
     
     # Close the driver
