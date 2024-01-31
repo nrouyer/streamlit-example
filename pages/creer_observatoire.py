@@ -34,7 +34,7 @@ if question:
 
     # Function to add an event to the Neo4j database
     def add_event(session, url, description):
-        session.run("MERGE (e:Event {url: $url}) ON CREATE SET e.description = $description", url=url, description=description)
+        session.run("MERGE (e:Event {url: $url}) ON CREATE SET e.description = $description, e.dateCreation=datetime()", url=url, description=description)
 
     with st.spinner('Collecte des événements...'):
             # Insert data from the DataFrame
