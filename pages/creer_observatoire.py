@@ -36,11 +36,13 @@ if question:
     def add_event(session, url, description):
         session.run("MERGE (e:Event {url: $url}) ON CREATE SET e.description = $description", url=url, description=description)
 
-    # Insert data from the DataFrame
-    with driver.session() as session:
-        for result in results:
-            add_event(session, result.url, result.description)
+    with st.spinner('Collecte des événements...'):
+            # Insert data from the DataFrame
+            with driver.session() as session:
+                for result in results:
+                    add_event(session, result.url, result.description)
 
+    st.success('Collecte terminée !')    
     
     
     # Close the driver
