@@ -43,11 +43,12 @@ if question:
 
     with st.spinner('Collecte des articles...'):
         # Insert data from the DataFrame
-        st.info('Ouverture de session', icon="ℹ️")
+        
         with driver.session() as session:
             for result in results:
                 add_article(session, result.url, result.description)
 
+            st.info('Enrichissement des articles', icon="ℹ️")    
             for result in results:
                 page = requests.get(result.url)
                 soup = BeautifulSoup(page.content, "html.parser")
@@ -61,6 +62,9 @@ if question:
                         update_article(session, result.url, text)
                     else:
                         st.error('Le texte est vide', icon="🚨")
+                else:
+                    st.error('Les paragraphes sont vides', icon="🚨")      
+            st.info('Fin enrichissement des articles', icon="ℹ️")    
     st.success('Collecte des articles terminée !')        
     
     # Close the driver
