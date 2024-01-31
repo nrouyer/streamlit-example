@@ -53,13 +53,13 @@ if question:
                 paragraphs = soup.find_all("p", class_="")
                 if paragraphs:
                     text = ""
-                        for paragraph in paragraphs:
-                            text = text + paragraph.text.strip()
-                        if text:
-                            st.info('le texte n est pas vide', icon="ℹ️")
-                            update_article(session, result.url, text)
-                        else:
-                            st.error('Le texte est vide', icon="🚨")
+                    for paragraph in paragraphs:
+                        text = text + paragraph.text.strip()
+                    if text:
+                        st.info('le texte n est pas vide', icon="ℹ️")
+                        update_article(session, result.url, text)
+                    else:
+                        st.error('Le texte est vide', icon="🚨")
     st.success('Collecte des articles terminée !')        
     
     # Close the driver
