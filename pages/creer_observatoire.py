@@ -38,6 +38,9 @@ if question:
     def add_article(session, url, description):
         session.run("MERGE (a:Article {url: $url}) ON CREATE SET a.description = $description, a.dateCreation=datetime()", url=url, description=description)
 
+    def ajout_article(session, url, description, text):
+        session.run("MERGE (a:Article {url: $url}) ON CREATE SET a.description = $description, a.text = $text, a.dateCreation=datetime()", url=url, description=description, text=text)
+
     def update_article(session, url, text):
         session.run("MATCH (a:Article {url: $url}) ON MATCH SET a.text = $text", url=url, text=text)
 
@@ -45,8 +48,8 @@ if question:
         # Insert data from the DataFrame
         
         with driver.session() as session:
-            for result in results:
-                add_article(session, result.url, result.description)
+            #for result in results:
+             #   add_article(session, result.url, result.description)
 
             st.info('Enrichissement des articles', icon="ℹ️")    
             for result in results:
@@ -54,17 +57,12 @@ if question:
                 soup = BeautifulSoup(page.content, "html.parser")
                 paragraphs = soup.find_all("p", class_="")
                 if paragraphs:
-                    st.info('le paragraphe n est pas vide', icon="ℹ️")
                     text = ""
                     for paragraph in paragraphs:
                         text = text + paragraph.text.strip()
                     if text:
-                        st.info('le texte n est pas vide', icon="ℹ️")
-                        update_article(session, result.url, text)
-                    else:
-                        st.error('Le texte est vide', icon="🚨")
-                else:
-                    st.info('Les paragraphes sont vides', icon="🚨")      
+                        # update_article(session, result.url, text)
+                        ajout_article(session, result.url, result.description, text)   
             st.info('Fin enrichissement des articles', icon="ℹ️")    
     st.success('Collecte des articles terminée !')        
     
