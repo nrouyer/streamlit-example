@@ -56,9 +56,9 @@ vectorstore = Neo4jVector.from_existing_graph(
     url=url,
     username=username,
     password=password,
-    index_name='eventdescription',
-    node_label="Event",
-    text_node_properties=['description'],
+    index_name='articledescription',
+    node_label="Article",
+    text_node_properties=['text', 'description', 'url'],
     embedding_node_property='embedding',
 )
 
