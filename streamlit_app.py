@@ -27,7 +27,7 @@ show_pages_from_config()
 # Observatoire des accidents
 """
 
-st.image('images/chatgpt_accident.png', caption='Accidents', width=500)
+#st.image('images/chatgpt_accident.png', caption='Accidents', width=500)
 
 # openai_api_key = st.secrets["OPENAI_KEY"]
 
@@ -72,9 +72,9 @@ question = container.text_input("**:blue[Question:]**", "")
 if question:
     tab1, tab2 = st.tabs(["No-RAG", "Basic RAG"])
     with tab1:
-        st.markdown("**:blue[No-RAG.] LLM only. Purely generated answer:**")
+        st.markdown("**:blue[No-RAG.] LLM seulement. Réponse générée par l'IA générative seule:**")
         st.write(llm(question))
     with tab2:
-        st.markdown("**:blue[Basic RAG.] Answer from vector search only:**")
+        st.markdown("**:blue[Basic RAG.] Réponse par recherche vectorielle:**")
         st.write(vector_qa.run(question))
     
