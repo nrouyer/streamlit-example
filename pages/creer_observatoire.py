@@ -13,7 +13,7 @@ from st_pages import show_pages_from_config
 
 show_pages_from_config()
 
-st.title("📝 Créer un nouvel observatoire sur les accidents")
+st.title("📝 Créer un nouvel observatoire")
 
 question = st.text_input(
     "Renseigner les termes de recherche",
