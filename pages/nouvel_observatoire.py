@@ -37,6 +37,35 @@ CREATE CONSTRAINT node_key_facteur_id IF NOT EXISTS FOR (n:Facteur) REQUIRE n.id
 CREATE CONSTRAINT node_key_solution_id IF NOT EXISTS FOR (n:Solution) REQUIRE n.id IS NODE KEY;
 """
 
+constraint_personne_id = """
+CREATE CONSTRAINT node_key_personne_id IF NOT EXISTS FOR (n:Personne) REQUIRE n.id IS NODE KEY;
+"""
+constraint_groupe_id = """
+CREATE CONSTRAINT node_key_groupe_id IF NOT EXISTS FOR (n:Groupe) REQUIRE n.id IS NODE KEY;
+"""
+constraint_impact_id = """
+CREATE CONSTRAINT node_key_impact_id IF NOT EXISTS FOR (n:Impact) REQUIRE n.id IS NODE KEY;
+"""
+constraint_evenement_id = """
+CREATE CONSTRAINT node_key_evenement_id IF NOT EXISTS FOR (n:Evenement) REQUIRE n.id IS NODE KEY;
+"""
+constraint_typeevenement_id = """
+CREATE CONSTRAINT node_key_typeevenement_id IF NOT EXISTS FOR (n:TypeEvenement) REQUIRE n.id IS NODE KEY;
+"""
+constraint_article_id = """
+CREATE CONSTRAINT node_key_article_id IF NOT EXISTS FOR (n:Article) REQUIRE n.id IS NODE KEY;
+"""
+constraint_document_id = """
+CREATE CONSTRAINT node_key_document_id IF NOT EXISTS FOR (n:Document) REQUIRE n.id IS NODE KEY;
+"""
+constraint_facteur_id = """
+CREATE CONSTRAINT node_key_facteur_id IF NOT EXISTS FOR (n:Facteur) REQUIRE n.id IS NODE KEY;
+"""
+constraint_solution_id = """
+CREATE CONSTRAINT node_key_solution_id IF NOT EXISTS FOR (n:Solution) REQUIRE n.id IS NODE KEY;
+"""
+
+
 prompt1="""Depuis la description de l'accident ci-dessous, extraire les entités et les relations décrites dans le format mentionné :
 0. TOUJOURS TERMINER LA RÉPONSE. Ne jamais envoyer de réponses partielles.
 1. Tout d'abord, recherchez ces types d'entités dans le texte et générez-les dans un format séparé par des virgules, similaire à celui des types d'entités. La propriété `id` de chaque entité doit être alphanumérique et unique parmi les entités. Vous ferez référence à cette propriété pour définir la relation entre les entités. Ne créez pas de nouveaux types d'entités qui ne sont pas mentionnés ci-dessous. Le document doit être résumé et stocké dans l'entité Article sous la propriété `description`. Vous devrez générer autant d'entités que nécessaire selon les types ci-dessous :
@@ -210,7 +239,15 @@ if question:
         
         with driver.session() as session:
             st.info('Mise à jour des contraintes', icon="ℹ️")    
-            session.run(constraints_cyp)    
+            session.run(constraint_personne_id)
+            session.run(constraint_groupe_id)
+            session.run(constraint_impact_id)
+            session.run(constraint_evenement_id)
+            session.run(constraint_typeevenement_id)
+            session.run(constraint_article_id)
+            session.run(constraint_document_id)
+            session.run(constraint_facteur_id)
+            session.run(constraint_solution_id)    
 
             st.info('Enrichissement des articles', icon="ℹ️")    
             for result in results:
