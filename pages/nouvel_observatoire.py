@@ -236,18 +236,19 @@ def generate_cypher(in_json):
     return e_stmt, r_stmt
 
 def graph_article(session, text):
-    prompts = [prompt1]
-    resultats = []
-    for p in prompts:
-        resultats = run_completion(p, resultats, clean_text(text))
+  prompts = [prompt1]
+  resultats = []
+  for p in prompts:
+    resultats = run_completion(p, resultats, clean_text(text))
     if resultats:
-        ent_cyp, rel_cyp = generate_cypher(resultats)
-        # ingérer les entités
-        st.info('Ingestion des entités', icon="ℹ️") 
-        session.run(ent_cyp)
-        # ingérer les relations
-        st.info('Ingestion des relations', icon="ℹ️") 
-        session.run(rel_cyp)
+      ent_cyp, rel_cyp = generate_cypher(resultats)
+      # ingérer les entités
+      st.info('Ingestion des entités', icon="ℹ️") 
+      session.run(ent_cyp)
+      # ingérer les relations
+      st.info('Ingestion des relations', icon="ℹ️") 
+      session.run(rel_cyp)
+    
 
 question = st.text_input(
     "Renseigner les termes de recherche",
@@ -293,7 +294,7 @@ if question:
                     for paragraph in paragraphs:
                         text = text + paragraph.text.strip()
                     if text:
-                        st.info('texte : ' + text, icon="ℹ️")
+                        #st.info('texte : ' + text, icon="ℹ️")
                         # update_article(session, result.url, text)
                         graph_article(session, text)   
             st.info('Fin enrichissement des articles', icon="ℹ️")    
