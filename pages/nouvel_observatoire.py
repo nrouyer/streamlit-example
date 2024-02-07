@@ -121,19 +121,28 @@ openai.api_key = st.secrets["OPENAI_KEY"]
 def process_gpt(system,
                 prompt):
 
-    completion = openai.ChatCompletion.create(
+    #completion = openai.ChatCompletion.create(
         # engine="gpt-3.5-turbo",
         #model="gpt-3.5-turbo",
         #max_tokens=2400,
-        model="gpt-4",
-        max_tokens=4096,
+        #model="gpt-4",
+        #max_tokens=4096,
         # Try to be as deterministic as possible
-        temperature=0,
-        messages=[
-            {"role": "system", "content": system},
-            {"role": "user", "content": prompt},
-        ]
-    )
+        #temperature=0,
+        #messages=[
+            #{"role": "system", "content": system},
+            #{"role": "user", "content": prompt},
+        #]
+    #)
+    completion = openai.chat.completions.create(
+      model="gpt-4",
+      temperature=0,
+      messages=[
+        {"role": "system", "content": system},
+        {"role": "user", "content": prompt},
+      ],
+    ) 
+
     nlp_results = completion.choices[0].message.content
     return nlp_results
 
