@@ -114,6 +114,29 @@ Accident :
 $ctext
 """
 
+openai.api_key = st.secrets["OPENAI_KEY"]
+
+# GPT-4 or GPT-3.5 Prompt to complete
+@retry(tries=2, delay=5)
+def process_gpt(system,
+                prompt):
+
+    completion = openai.ChatCompletion.create(
+        # engine="gpt-3.5-turbo",
+        #model="gpt-3.5-turbo",
+        #max_tokens=2400,
+        model="gpt-4",
+        max_tokens=4096,
+        # Try to be as deterministic as possible
+        temperature=0,
+        messages=[
+            {"role": "system", "content": system},
+            {"role": "user", "content": prompt},
+        ]
+    )
+    nlp_results = completion.choices[0].message.content
+    return nlp_results
+
 def clean_text(text):
   clean = "\n".join([row for row in text.split("\n")])
   clean = re.sub(r'\(fig[^)]*\)', '', clean, flags=re.IGNORECASE)
@@ -226,7 +249,7 @@ question = st.text_input(
 if question:
     st.write('Recherche avec les termes : ', question)
     
-    results = search(question, lang="fr", num_results=5, advanced=True)
+    results = search(question, lang="fr", num_results=20, advanced=True)
         
     # Neo4j connection details
     url = st.secrets["AAA_URI"]
