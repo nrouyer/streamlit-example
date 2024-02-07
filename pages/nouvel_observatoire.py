@@ -238,16 +238,16 @@ if question:
         # Insert data from the DataFrame
         
         with driver.session() as session:
-            st.info('Mise à jour des contraintes', icon="ℹ️")    
-            session.run(constraint_personne_id)
-            session.run(constraint_groupe_id)
-            session.run(constraint_impact_id)
-            session.run(constraint_evenement_id)
-            session.run(constraint_typeevenement_id)
-            session.run(constraint_article_id)
-            session.run(constraint_document_id)
-            session.run(constraint_facteur_id)
-            session.run(constraint_solution_id)    
+            #st.info('Mise à jour des contraintes', icon="ℹ️")    
+            #session.run(constraint_personne_id)
+            #session.run(constraint_groupe_id)
+            #session.run(constraint_impact_id)
+            #session.run(constraint_evenement_id)
+            #session.run(constraint_typeevenement_id)
+            #session.run(constraint_article_id)
+            #session.run(constraint_document_id)
+            #session.run(constraint_facteur_id)
+            #session.run(constraint_solution_id)    
 
             st.info('Enrichissement des articles', icon="ℹ️")    
             for result in results:
