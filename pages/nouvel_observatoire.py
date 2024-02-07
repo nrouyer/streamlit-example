@@ -245,12 +245,13 @@ def graph_article(session, text):
       # ingérer les entités
       st.info('Ingestion des entités', icon="ℹ️") 
       st.info(ent_cyp, icon="ℹ️")
-      for req in ent_cyp:
-        session.run(req)
+      for req_ent in ent_cyp:
+        session.run(req_ent)
       # ingérer les relations
       st.info('Ingestion des relations', icon="ℹ️") 
       st.info(rel_cyp, icon="ℹ️")
-      session.run(rel_cyp)
+      for req_rel in rel_cyp:
+        session.run(req_rel)
     
 
 question = st.text_input(
