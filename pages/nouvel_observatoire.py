@@ -107,7 +107,7 @@ prompt1="""Depuis la description de l'accident ci-dessous, extraire les entités
 Le resultat devrait ressembler à :
 {
     "entites": [{"label":"Evenement","id":string,"description":string,"date":datetime,"duree":string,"lieu":string}],
-    "relations": [{"personne1|A_TUE|personne2"}]
+    "relations": [{"source":string',"relation":string,"target":string}]
 }
 
 Accident :
@@ -216,15 +216,15 @@ def generate_cypher(in_json):
 
       for st in obj['relations']:
           print(st)
-          rels = st.split("|")
+          #rels = st.split("|")
           #rels = st.split(",")
           #print(rels)
-          #src_id = get_cypher_compliant_var(st['source'])
-          #rel = st['relation']
-          #tgt_id = get_cypher_compliant_var(st['cible'])
-          src_id = get_cypher_compliant_var(rels[0].strip())
-          rel = rels[1]
-          tgt_id = get_cypher_compliant_var(rels[2].strip())
+          src_id = get_cypher_compliant_var(st['source'])
+          rel = st['relation']
+          tgt_id = get_cypher_compliant_var(st['target'])
+          #src_id = get_cypher_compliant_var(rels[0].strip())
+          #rel = rels[1]
+          #tgt_id = get_cypher_compliant_var(rels[2].strip())
           #print(src_id)
           #print(rel)
           #print(tgt_id)
