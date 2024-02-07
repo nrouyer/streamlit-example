@@ -12,3 +12,4 @@ st_pages
 streamlit_extras
 requests
 bs4
+retry
