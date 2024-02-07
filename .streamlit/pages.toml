@@ -7,3 +7,8 @@ icon = ":house:"
 path = "pages/creer_observatoire.py"
 name = "Creer Observatoire"
 icon = ":books:"
+
+[[pages]]
+path = "pages/nouvel_observatoire.py"
+name = "Nouvel Observatoire"
+icon = ":bar_chart:"
