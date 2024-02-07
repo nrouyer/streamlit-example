@@ -244,11 +244,11 @@ def graph_article(session, text):
       ent_cyp, rel_cyp = generate_cypher(resultats)
       # ingérer les entités
       st.info('Ingestion des entités', icon="ℹ️") 
-      st.info('ent_cyp = ' + ent_cyp, icon="ℹ️")
+      st.info(ent_cyp, icon="ℹ️")
       session.run(ent_cyp)
       # ingérer les relations
       st.info('Ingestion des relations', icon="ℹ️") 
-      st.info('rel_cyp = ' + rel_cyp, icon="ℹ️")
+      st.info(rel_cyp, icon="ℹ️")
       session.run(rel_cyp)
     
 
