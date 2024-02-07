@@ -211,8 +211,10 @@ def graph_article(session, text):
     if resultats:
         ent_cyp, rel_cyp = generate_cypher(resultats)
         # ingérer les entités
+        st.info('Ingestion des entités', icon="ℹ️") 
         session.run(ent_cyp)
         # ingérer les relations
+        st.info('Ingestion des relations', icon="ℹ️") 
         session.run(rel_cyp)
 
 question = st.text_input(
@@ -259,6 +261,7 @@ if question:
                     for paragraph in paragraphs:
                         text = text + paragraph.text.strip()
                     if text:
+                        st.info('texte : ' + text, icon="ℹ️")
                         # update_article(session, result.url, text)
                         graph_article(session, text)   
             st.info('Fin enrichissement des articles', icon="ℹ️")    
