@@ -26,15 +26,15 @@ show_pages_from_config()
 st.title("🆕 Nouvel observatoire sur les accidents")
 
 constraints_cyp="""
-CREATE CONSTRAINT node_key_personne_id IF NOT EXISTS FOR (n:Personne) REQUIRE n.id IS NODE KEY
-CREATE CONSTRAINT node_key_groupe_id IF NOT EXISTS FOR (n:Groupe) REQUIRE n.id IS NODE KEY
-CREATE CONSTRAINT node_key_impact_id IF NOT EXISTS FOR (n:Impact) REQUIRE n.id IS NODE KEY
-CREATE CONSTRAINT node_key_evenement_id IF NOT EXISTS FOR (n:Evenement) REQUIRE n.id IS NODE KEY
-CREATE CONSTRAINT node_key_typeevenement_id IF NOT EXISTS FOR (n:TypeEvenement) REQUIRE n.id IS NODE KEY
-CREATE CONSTRAINT node_key_article_id IF NOT EXISTS FOR (n:Article) REQUIRE n.id IS NODE KEY
-CREATE CONSTRAINT node_key_document_id IF NOT EXISTS FOR (n:Document) REQUIRE n.id IS NODE KEY
-CREATE CONSTRAINT node_key_facteur_id IF NOT EXISTS FOR (n:Facteur) REQUIRE n.id IS NODE KEY
-CREATE CONSTRAINT node_key_solution_id IF NOT EXISTS FOR (n:Solution) REQUIRE n.id IS NODE KEY
+CREATE CONSTRAINT node_key_personne_id IF NOT EXISTS FOR (n:Personne) REQUIRE n.id IS NODE KEY;
+CREATE CONSTRAINT node_key_groupe_id IF NOT EXISTS FOR (n:Groupe) REQUIRE n.id IS NODE KEY;
+CREATE CONSTRAINT node_key_impact_id IF NOT EXISTS FOR (n:Impact) REQUIRE n.id IS NODE KEY;
+CREATE CONSTRAINT node_key_evenement_id IF NOT EXISTS FOR (n:Evenement) REQUIRE n.id IS NODE KEY;
+CREATE CONSTRAINT node_key_typeevenement_id IF NOT EXISTS FOR (n:TypeEvenement) REQUIRE n.id IS NODE KEY;
+CREATE CONSTRAINT node_key_article_id IF NOT EXISTS FOR (n:Article) REQUIRE n.id IS NODE KEY;
+CREATE CONSTRAINT node_key_document_id IF NOT EXISTS FOR (n:Document) REQUIRE n.id IS NODE KEY;
+CREATE CONSTRAINT node_key_facteur_id IF NOT EXISTS FOR (n:Facteur) REQUIRE n.id IS NODE KEY;
+CREATE CONSTRAINT node_key_solution_id IF NOT EXISTS FOR (n:Solution) REQUIRE n.id IS NODE KEY;
 """
 
 prompt1="""Depuis la description de l'accident ci-dessous, extraire les entités et les relations décrites dans le format mentionné :
