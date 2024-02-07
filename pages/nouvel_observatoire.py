@@ -245,7 +245,8 @@ def graph_article(session, text):
       # ingérer les entités
       st.info('Ingestion des entités', icon="ℹ️") 
       st.info(ent_cyp, icon="ℹ️")
-      session.run(ent_cyp)
+      for req in ent_cyp:
+        session.run(ent_cyp)
       # ingérer les relations
       st.info('Ingestion des relations', icon="ℹ️") 
       st.info(rel_cyp, icon="ℹ️")
