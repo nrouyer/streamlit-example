@@ -258,7 +258,7 @@ question = st.text_input(
 if question:
     st.write('Recherche avec les termes : ', question)
     
-    results = search(question, lang="fr", num_results=20, advanced=True)
+    results = search(question, lang="fr", num_results=5, advanced=True)
         
     # Neo4j connection details
     url = st.secrets["AAA_URI"]
