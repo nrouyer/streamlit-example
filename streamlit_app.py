@@ -58,23 +58,47 @@ vectorstore = Neo4jVector.from_existing_graph(
     password=password,
     index_name='articledescription',
     node_label="Article",
-    text_node_properties=['text', 'description', 'url'],
+    text_node_properties=['titre', 'description'],
     embedding_node_property='embedding',
 )
 
 vector_qa = RetrievalQA.from_chain_type(
     llm=ChatOpenAI(), chain_type="stuff", retriever=vectorstore.as_retriever())
 
+contextualize_query = """
+match (node)-[:DOCUMENTE]-(e:Evenement)
+WITH a, e
+OPTIONAL MATCH (e)-[r1:A]-(i:Impact)
+OPTIONAL MATCH (e)-[r2:A]-(te:TypeEvenement)
+OPTIONAL MATCH (e)<-[r3:EXPLIQUE]-(f:Facteur)
+WITh a, e, i, te, f
+RETURN "Titre Article: "+ a.titre + " description: "+ a.description + " impact: "+coalesce(i.name,"")+" type événement: "+ coalesce(te.type,"")+" facteur explicatif: "+ coalesce(f.name,"")+"\n" as context
+"""
+
+contextualized_vectorstore = Neo4jVector.from_existing_index(
+    OpenAIEmbeddings(),
+    url=url,
+    username=username,
+    password=password,
+    index_name="articledescription",
+    retrieval_query=contextualize_query,
+)
+
+vector_plus_context_qa = RetrievalQA.from_chain_type(
+    llm=ChatOpenAI(), chain_type="stuff", retriever=contextualized_vectorstore.as_retriever())
+
 # Streamlit layout with tabs
 container = st.container()
 question = container.text_input("**:blue[Question:]**", "")
 
 if question:
-    tab1, tab2 = st.tabs(["No-RAG", "Basic RAG"])
+    tab1, tab2, tab3 = st.tabs(["No-RAG", "Basic RAG", "Augmented RAG"])
     with tab1:
         st.markdown("**:blue[No-RAG.] LLM seulement. Réponse générée par l'IA générative seule:**")
         st.write(llm(question))
     with tab2:
         st.markdown("**:blue[Basic RAG.] Réponse par recherche vectorielle:**")
         st.write(vector_qa.run(question))
-    
+    with tab3:
+        st.markdown("**:blue[Augmented RAG.] Réponse par recherche vectorielle ET par augmentation de contexte:**")
+        st.write(vector_plus_context_qa.run(question))
