@@ -67,7 +67,7 @@ vector_qa = RetrievalQA.from_chain_type(
 
 contextualize_query = """
 match (node)-[:DOCUMENTE]-(e:Evenement)
-WITH a, e
+WITH node AS a, e
 OPTIONAL MATCH (e)-[r1:A]-(i:Impact)
 OPTIONAL MATCH (e)-[r2:A]-(te:TypeEvenement)
 OPTIONAL MATCH (e)<-[r3:EXPLIQUE]-(f:Facteur)
