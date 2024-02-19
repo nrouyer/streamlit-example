@@ -69,7 +69,7 @@ contextualize_query = """
 match (node)-[:DOCUMENTE]->(e:Evenement)
 WITH node AS a, e, score, {} as metadata limit 1
 OPTIONAL MATCH (e)<-[:EXPLIQUE]-(f:Facteur)-[:EXPLIQUE]->(:Evenement)
-WITH a, e, score, metadata, apoc.text.link(f.name, ",") AS facteurs
+WITH a, e, score, metadata, apoc.text.join(collect(f.name), ",") AS facteurs
 RETURN "Evenement : "+ e.description + " facteurs explicatifs : " + coalesce(facteurs, "") +"\n" as text, score, metadata
 """
 
