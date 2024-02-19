@@ -69,7 +69,7 @@ contextualize_query = """
 match (node)-[:DOCUMENTE]-(e:Evenement)
 WITH node AS a, e, score, {} as metadata limit 1
 OPTIONAL MATCH (e)<-[r1:EXPLIQUE]-(f:Facteur)-[r2:EXPLIQUE]->(e2:Evenement)<-[:DOCUMENTE]-(a2:Article)
-WITH a, e, i, te, f, score, metadata, collect(a2) AS autres_articles
+WITH a, e, i, f, score, metadata, collect(a2) AS autres_articles
 UNWIND autres_articles AS autre_article
 RETURN "Titre Article: "+ a.titre + " description: "+ a.description + " facteur explicatif: " + coalesce(f.name,"") + " autre_article: " + autre_article.description  +"\n" as text, score, metadata
 """
