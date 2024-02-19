@@ -65,7 +65,7 @@ vectorstore = Neo4jVector.from_existing_graph(
 vector_qa = RetrievalQA.from_chain_type(
     llm=ChatOpenAI(), chain_type="stuff", retriever=vectorstore.as_retriever())
 
-contextualize_query = """
+contextualize_query1 = """
 match (node)-[:DOCUMENTE]-(e:Evenement)
 WITH node AS a, e, score, {} as metadata limit 1
 OPTIONAL MATCH (e)<-[:EXPLIQUE]-(:Facteur)-[:EXPLIQUE]->(:Evenement)<-[:DOCUMENTE]-(a2:Article)
@@ -73,12 +73,12 @@ WITH a, e, i, score, metadata, count(distinct a2) AS nbAutresArticles
 RETURN "Titre Article: "+ a.titre + " description: "+ a.description + " autres evenements même facteur: " + nbAutresArticles +"\n" as text, score, metadata
 """
 
-contextualize_query1 = """
+contextualize_query = """
 match (node)-[:DOCUMENTE]-(e:Evenement)
 WITH node AS a, e, score, {} as metadata limit 1
 OPTIONAL MATCH (e)<-[:EXPLIQUE]-(:Facteur)
-WITH a, e, i, f, score, metadata, count(distinct a2) AS nbAutresArticles
-RETURN "Titre Article: "+ a.titre + " description: "+ a.description + " autres evenements même facteur: " + nbAutresArticles +"\n" as text, score, metadata
+WITH a, e, i, f, score, metadata
+RETURN "Titre Article: "+ a.titre + " description: "+ a.description + " facteur: "+ coalesce(f.name, "")+ "\n" as text, score, metadata
 """
 
 contextualized_vectorstore = Neo4jVector.from_existing_index(
