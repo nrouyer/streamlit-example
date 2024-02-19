@@ -68,9 +68,9 @@ vector_qa = RetrievalQA.from_chain_type(
 contextualize_query = """
 match (node)-[:DOCUMENTE]->(e:Evenement)
 WITH node AS a, e, score, {} as metadata limit 1
-OPTIONAL MATCH (e)<-[:EXPLIQUE]-(f:Facteur)-[:EXPLIQUE]->(:Evenement)
-WITH a, e, score, metadata, apoc.text.join(collect(f.name), ",") AS facteurs
-RETURN "Evenement : "+ e.description + " facteurs explicatifs : " + coalesce(facteurs, "") +"\n" as text, score, metadata
+OPTIONAL MATCH (e)<-[:EXPLIQUE]-(f:Facteur)-[:EXPLIQUE]->(e2:Evenement)
+WITH a, e, score, metadata, apoc.text.join(collect(e2.description), ",") AS autres_evenements
+RETURN "Evenement : "+ e.description + " autres événements dus aux mêmes facteurs : " + coalesce(autres_evenements, "") +"\n" as text, score, metadata
 """
 
 contextualize_query1 = """
