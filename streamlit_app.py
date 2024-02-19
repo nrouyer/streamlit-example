@@ -68,9 +68,9 @@ vector_qa = RetrievalQA.from_chain_type(
 contextualize_query = """
 match (node)-[:DOCUMENTE]-(e:Evenement)
 WITH node AS a, e, score, {} as metadata limit 1
-OPTIONAL MATCH (e)<-[:EXPLIQUE]-(f:Facteur)-[:EXPLIQUE]->(:Evenement)<-[:DOCUMENTE]-(a2:Article)
-WITH a, e, i, f, score, metadata, collect(a2.description) AS autres_articles
-RETURN "Titre Article: "+ a.titre + " description: "+ a.description + " facteur explicatif: " + coalesce(f.name,"") + " autre_article: " + coalesce(apoc.text.join(autres_articles, ' - '), "")  +"\n" as text, score, metadata
+OPTIONAL MATCH (e)<-[:EXPLIQUE]-(:Facteur)-[:EXPLIQUE]->(:Evenement)<-[:DOCUMENTE]-(a2:Article)
+WITH a, e, i, f, score, metadata, count(distinct a2) AS nbAutresArticles
+RETURN "Titre Article: "+ a.titre + " description: "+ a.description + " autres evenements même facteur: " + nbAutresArticles +"\n" as text, score, metadata
 """
 
 contextualized_vectorstore = Neo4jVector.from_existing_index(
