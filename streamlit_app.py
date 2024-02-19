@@ -66,15 +66,15 @@ vector_qa = RetrievalQA.from_chain_type(
     llm=ChatOpenAI(), chain_type="stuff", retriever=vectorstore.as_retriever())
 
 contextualize_query = """
-match (node)-[:DOCUMENTE]-(e:Evenement)
+match (node)-[:DOCUMENTE]->(e:Evenement)
 WITH node AS a, e, score, {} as metadata limit 1
-OPTIONAL MATCH (e)<-[:EXPLIQUE]-(:Facteur)-[:EXPLIQUE]->(:Evenement)<-[:DOCUMENTE]-(a2:Article)
-WITH a, e, score, metadata, count(distinct a2) AS nbAutresArticles
-RETURN "Titre Article: "+ a.titre + " description: "+ a.description + "\nautres evenements même facteur: "+ nbAutresArticles +"\n" as text, score, metadata
+OPTIONAL MATCH (e)<-[:EXPLIQUE]-(f:Facteur)-[:EXPLIQUE]->(:Evenement)<-[:DOCUMENTE]-(a2:Article)
+WITH a, e, score, metadata, apoc.text.join(collect(f.name), ",") AS facteurs,  apoc.text.join(collect(a2.titre), "\n") AS articles
+RETURN "Titre Article: "+ a.titre + " ,description: "+ a.description + " facteurs explicatifs : " + coalesce(facteurs, "") + "\nautres evenements mêmes facteurs: "+ coalesce(articles, "") +"\n" as text, score, metadata
 """
 
 contextualize_query1 = """
-match (node)-[:DOCUMENTE]-(e:Evenement)
+match (node)-[:DOCUMENTE]->(e:Evenement)
 WITH node AS a, e, score, {} as metadata limit 1
 OPTIONAL MATCH (e)<-[:EXPLIQUE]-(:Facteur)
 WITH a, e, i, f, score, metadata
