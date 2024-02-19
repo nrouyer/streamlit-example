@@ -69,9 +69,8 @@ contextualize_query = """
 match (node)-[:DOCUMENTE]-(e:Evenement)
 WITH node AS a, e, score, {} as metadata limit 1
 OPTIONAL MATCH (e)<-[:EXPLIQUE]-(f:Facteur)-[:EXPLIQUE]->(:Evenement)<-[:DOCUMENTE]-(a2:Article)
-WITH a, e, i, f, score, metadata, collect(a2) AS autres_articles
-UNWIND autres_articles AS autre_article
-RETURN "Titre Article: "+ a.titre + " description: "+ a.description + " facteur explicatif: " + coalesce(f.name,"") + " autre_article: " + coalesce(autre_article.description, "")  +"\n" as text, score, metadata
+WITH a, e, i, f, score, metadata, collect(a2.description) AS autres_articles
+RETURN "Titre Article: "+ a.titre + " description: "+ a.description + " facteur explicatif: " + coalesce(f.name,"") + " autre_article: " + coalesce(apoc.text.join(autres_articles, ' - '), "")  +"\n" as text, score, metadata
 """
 
 contextualized_vectorstore = Neo4jVector.from_existing_index(
