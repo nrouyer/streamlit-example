@@ -72,7 +72,7 @@ prompt1="""Depuis la description de l'accident ci-dessous, extraire les entités
     Types d'entités :
     label:'Evenement',id:string,description:string,date:datetime,duree:string,lieu:string //Evenement c'est un événement qui s'est produit, par exemple un accident
     label:'TypeEvenement',id:string,type:string //TypeEvenement la propriété `id` c'est le type d'événement qui s'est produit
-    label:'Article',id:string,urlMedia:string,uri:string,url:string,journaliste:string,synthese:string,date:datetime,titre:string,media:string,description:string //Entité Article ; la propriété `id` c'est le nom de l'article, en lowercase & camel-case & qui commence toujours par un caractère alphabétique
+    label:'Article',id:string,urlMedia:string,uri:string,url:string,journaliste:string,synthese:string,date:datetime,titre:string,media:string,description:string,texte:string //Entité Article ; la propriété `id` c'est le nom de l'article, en lowercase & camel-case & qui commence toujours par un caractère alphabétique. La propriété `texte`doit contenir le texte intégral de l'article. Le champ `url` doit être renseigné par le lien Internet de l'article
     label:'Document',id:string,description:string //Entité Document ; la propriété `id` c'est le nom de du document, en lowercase & camel-case & qui commence toujours par un caractère alphabétique
     label:'Facteur',id:string,name:string // Entité Facteur c'est le facteur explicatif de l'événement; la propriété `id` c'est le nom du facteur, en lowercase & camel-case & qui commence toujours par un caractère alphabétique
     label:'Solution',id:string,name:string,description:string,when:string // Entité Solution c'est la solution qui pourrait aider à résoudre l'événement qui s'est produit ; la propriété `id` c'est le nom du facteur, en lowercase & camel-case & qui commence toujours par un caractère alphabétique
@@ -265,7 +265,7 @@ question = st.text_input(
 if question:
     st.write('Recherche avec les termes : ', question)
     
-    results = search(question, lang="fr", num_results=10, advanced=True)
+    results = search(question, lang="fr", num_results=5, advanced=True)
         
     # Neo4j connection details
     url = st.secrets["AAA_URI"]
